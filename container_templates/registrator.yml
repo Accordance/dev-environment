@@ -1,0 +1,8 @@
+registrator:
+  command: consul://consul:8500 --ttl 500
+  image: progrium/registrator:latest
+  hostname: dockerhost
+  links:
+    - consul:consul
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock

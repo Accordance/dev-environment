@@ -1,0 +1,5 @@
+id: anonymous
+type: client
+rules:
+  - service: ''
+    policy: write

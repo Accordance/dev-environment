@@ -1,0 +1,17 @@
+nginx:
+  # command: nginx -g "daemon off;"
+  image: accordance/nginx_consul:0.0.5
+  # environment:
+  #   SERVICE_443_NAME: https
+  #   SERVICE_443_ID: https.12345
+  #   SERVICE_443_SNI: enabled
+  #   SERVICE_80_NAME: http
+  #   SERVICE_TAGS: www
+  links:
+    - consul:consul
+  ports:
+    - 8080:80
+  volumes:
+    - <%= work_dir %>/nginx_consul_config/app.conf:/etc/consul-templates/nginx.conf:ro
+    - <%= work_dir %>/nginx_consul_config/nginx.conf:/etc/nginx/nginx.conf:ro
+    - <%= work_dir %>/../helios/dist:/usr/share/nginx/html:rw

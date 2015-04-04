@@ -1,0 +1,6 @@
+redis.0:
+  image: redis:2.8.19
+  environment:
+    SERVICE_ID: redis-0
+  ports:
+    - 6379:6379
