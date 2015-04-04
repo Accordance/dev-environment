@@ -118,7 +118,7 @@ def create_docker_command(info)
   docker_cmd.push info['action'] || 'run -d'
   docker_cmd.push "--name=\"#{info['name']}\""
   docker_cmd.push "--add-host=\"dockerhost:#{dockerhost}\""
-  docker_cmd.push "--hostname=\"#{info['hostname']}\"" if info.key? 'hostname' 
+  docker_cmd.push "--hostname=\"#{info['hostname']}\"" if info.key? 'hostname'
   docker_cmd.push info['environment'].map { |k,v| "-e #{k.to_s}=\"#{v}\"" } if info.key? 'environment'
   docker_cmd.push info['ports'].map { |port| "-p #{port}"} if info.key? 'ports'
   docker_cmd.push info['links'].map { |link| "--link #{link}"} if info.key? 'links'
@@ -173,10 +173,10 @@ def load_container_template(name)
 end
 
 desc "Build environment"
-task :start => [ 'consul:start', 'consul:init', 'registrator:start', 'redis:start' ]
+task :start => [ 'consul:start', 'consul:init', 'registrator:start', 'redis:start', 'orientdb:start' ]
 
 desc 'Destroy environment'
-task :stop => [ 'nginx:stop', 'redis:stop', 'registrator:stop', 'consul:stop' ]
+task :stop => [ 'orientdb:stop', 'nginx:stop', 'redis:stop', 'registrator:stop', 'consul:stop' ]
 
 desc 'Initialize data'
 task :init => []

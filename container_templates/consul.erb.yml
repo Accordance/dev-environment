@@ -1,6 +1,8 @@
 consul:
   command: -server -bootstrap-expect 1 -dc dev -node dockerhost -advertise <%= dockerhost %>
   image: consul_acl:latest
+  # environment:
+  #   SERVICE_8500_NAME: consul
   ports:
     - 8300:8300
     - 8301:8301

@@ -1,0 +1,11 @@
+orientdb:
+  image: accordance/orientdb-2.0:0.0.1
+  environment:
+    SERVICE_2480_NAME: orientdb
+  ports:
+    - 2424:2424
+    - 2480:2480
+  volumes:
+    - <%= work_dir %>/orientdb_config/config:/opt/orientdb/config:ro
+    - <%= work_dir %>/orientdb_config/databases:/opt/orientdb/databases:rw
+    - <%= work_dir %>/orientdb_config/backup:/opt/orientdb/backup:rw
