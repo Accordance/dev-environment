@@ -1,0 +1,13 @@
+inherit_from: .rubocop_todo.yml
+
+# I never write any, so don't bug me about it
+Documentation:
+  Enabled: false
+
+# SOIDs don't need commas
+NumericLiterals:
+  MinDigits: 14
+
+# 80 is rather short
+#LineLength:
+#  Max: 120

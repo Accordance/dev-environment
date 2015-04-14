@@ -14,7 +14,7 @@ namespace :prepare do
     File.open(consul_config_file_path, 'w') { |f| f.write(JSON.pretty_generate(consul_config)) }
 
     secrets_dir = "secrets/development"
-    FileUtils.mkdir_p secrets_dir unless Dir.exists?(secrets_dir)
+    FileUtils.mkdir_p secrets_dir unless Dir.exist?(secrets_dir)
 
     active_dir_secret = [
       {

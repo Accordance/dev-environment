@@ -3,6 +3,8 @@ consul:
   image: consul_acl:latest
   # environment:
   #   SERVICE_8500_NAME: consul
+  #   SERVICE_TAGS: master,backups
+  #   SERVICE_REGION: us2
   ports:
     - 8300:8300
     - 8301:8301
