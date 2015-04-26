@@ -1,9 +1,10 @@
 require 'json'
 require 'yaml'
-require_relative '../rake_tasks/lib/dev_environment'
-require_relative '../rake_tasks/lib/consul_utils'
+require_relative 'lib/dev_environment'
+require_relative 'lib/consul_utils'
 
 namespace :consul do
+  desc 'Initialize Consul Policies and Secrets'
   task :init, :environment do |t, args|
     # TODO: move this check to the "container checks"
     sleep 2
@@ -81,5 +82,5 @@ namespace :consul do
   end
 
   # Adding prerequisite for Consul creation
-  Rake::Task["cntnr_tmplt:consul:start"].enhance ["consul:build_dev_consul"]
+  Rake::Task['cntnr_tmplt:consul:start'].enhance ['consul:build_dev_consul']
 end

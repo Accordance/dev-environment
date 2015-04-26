@@ -11,7 +11,7 @@ module Consul
       when :development
         "http://#{Docker::Utils.dockerhost}:8500"
       when :production
-        "http://consul01.ctct.net"
+        'http://consul01.ctct.net'
       else
         fail "Unknown environment: '#{env}'"
     end
@@ -30,6 +30,28 @@ module Consul
 
   def self.app_secret_exist?(app_id)
     File.exist?("secrets/development/consul_token_#{app_id}")
+  end
+
+  def self.register_service(env)
+    url = "#{consul(env)}/v1/catalog/register"
+    "#{url}?token=#{consul_token(env)}"
+  end
+
+  def self.deregister_service(env)
+    url = "#{consul(env)}/v1/catalog/deregister"
+    "#{url}?token=#{consul_token(env)}"
+  end
+
+  def self.get_kv(env, path)
+    url = "#{consul(env)}/v1/kv/#{path}"
+    "#{url}?token=#{consul_token(env)}"
+  end
+
+  def self.set_kv(env, path, value)
+    command = "curl -v  --trace-ascii /dev/stderr -X PUT -d \"#{value}\" #{Consul.get_kv(env, path)} 2> /dev/null"
+    puts command if LOG_LEVEL == 'DEBUG'
+    `#{command}`
+    Environment.validate!
   end
 
 end
