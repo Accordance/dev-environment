@@ -1,0 +1,14 @@
+id: atlas
+type: client
+rules:
+  - description: Default all keys to read-only
+    key: ""
+    policy: read
+  - description: Service-specific place to write its data
+    key: service/atlas/
+    policy: write
+  - description: Deny access to the private dir
+    key: secrets/
+    policy: deny
+  - key: secrets/orientdb
+    policy: read

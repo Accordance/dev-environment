@@ -2,6 +2,7 @@ orientdb:
   image: accordance/orientdb-2.0:0.0.1
   environment:
     SERVICE_2480_NAME: orientdb
+    SERVICE_2424_NAME: orientdb-data
   ports:
     - 2424:2424
     - 2480:2480
