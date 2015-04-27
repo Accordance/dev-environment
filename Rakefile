@@ -8,12 +8,15 @@ Dir.glob('rake_tasks/*.rake').each { |r| load r }
 desc "Build environment"
 task :start => ['cntnr_tmplt:consul:start',
                 'consul:init',
+                'secrets:configure',
                 'cntnr_tmplt:registrator:start',
                 'cntnr_tmplt:redis:start',
-                'cntnr_tmplt:orientdb:start']
+                'cntnr_tmplt:orientdb:start',
+                'portal:start']
 
 desc 'Destroy environment'
-task :stop => ['cntnr_tmplt:orientdb:stop',
+task :stop => ['portal:stop',
+               'cntnr_tmplt:orientdb:stop',
                'cntnr_tmplt:nginx:stop',
                'cntnr_tmplt:redis:stop',
                'cntnr_tmplt:registrator:stop',
