@@ -12,10 +12,12 @@ task :start => ['cntnr_tmplt:consul:start',
                 'cntnr_tmplt:registrator:start',
                 'cntnr_tmplt:redis:start',
                 'cntnr_tmplt:orientdb:start',
-                'portal:start']
+                'portal:start',
+                'cntnr_tmplt:nginx:start']
 
 desc 'Destroy environment'
-task :stop => ['portal:stop',
+task :stop => ['cntnr_tmplt:nginx:start',
+               'portal:stop',
                'cntnr_tmplt:orientdb:stop',
                'cntnr_tmplt:nginx:stop',
                'cntnr_tmplt:redis:stop',
