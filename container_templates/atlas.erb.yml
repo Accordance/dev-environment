@@ -1,5 +1,5 @@
 atlas:
-  command: --consul.host=<%= dockerhost %>
+  command: --consul.host=<%= dockerhost %> --consul.serviceOverride.address=<%= dockerhost %>
   image: accordance/atlas:0.0.2
   ports:
     - 8080:8080
