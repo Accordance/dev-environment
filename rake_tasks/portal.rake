@@ -4,11 +4,11 @@ require_relative 'lib/consul_utils'
 namespace :portal do
 
   desc 'Start all Accordance services'
-  task :start => [ 'cntnr_tmplt:atlas:start'
+  task :start => [ 'container:atlas:start'
                  ]
 
   desc 'Stop all Accordance services'
-  task :stop => [ 'cntnr_tmplt:atlas:stop'
+  task :stop => [ 'container:atlas:stop'
                 ]
 
   desc 'Register a service with Consul'

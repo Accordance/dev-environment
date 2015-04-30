@@ -6,26 +6,26 @@ Container::Templates::RakeTask.new(:container_templates)
 Dir.glob('rake_tasks/*.rake').each { |r| load r }
 
 desc "Build environment"
-task :start => ['cntnr_tmplt:consul:start',
+task :start => ['container:consul:start',
                 'consul:init',
                 'secrets:configure',
-                'cntnr_tmplt:registrator:start',
-                'cntnr_tmplt:redis:start',
-                'cntnr_tmplt:orientdb:start',
+                'container:registrator:start',
+                'container:redis:start',
+                'container:orientdb:start',
                 'portal:start',
-                'cntnr_tmplt:nginx:start']
+                'container:nginx:start']
 
 desc 'Destroy environment'
-task :stop => ['cntnr_tmplt:nginx:stop',
+task :stop => ['container:nginx:stop',
                'portal:stop',
-               'cntnr_tmplt:orientdb:stop',
-               'cntnr_tmplt:nginx:stop',
-               'cntnr_tmplt:redis:stop',
-               'cntnr_tmplt:registrator:stop',
-               'cntnr_tmplt:consul:stop']
+               'container:orientdb:stop',
+               'container:nginx:stop',
+               'container:redis:stop',
+               'container:registrator:stop',
+               'container:consul:stop']
 
 desc 'Initialize data'
 task :init => []
 
 desc 'Start everything'
-task default: [:start, :init, 'cntnr_tmplt:nginx:start']
+task default: [:start, :init, 'container:nginx:start']

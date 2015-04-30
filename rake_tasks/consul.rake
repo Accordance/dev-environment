@@ -82,5 +82,5 @@ namespace :consul do
   end
 
   # Adding prerequisite for Consul creation
-  Rake::Task['cntnr_tmplt:consul:start'].enhance ['consul:build_dev_consul']
+  Rake::Task['container:consul:start'].enhance ['consul:build_dev_consul']
 end

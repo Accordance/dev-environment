@@ -47,7 +47,7 @@ module Container
           template_name = Pathname(strip_extension(full_path)).relative_path_from(curr)
           # puts "Found #{template_name}: #{friendly_name(template_name.to_s)}"
 
-          load_template ('cntnr_tmplt:' + friendly_name(template_name.to_s)), full_path, template_name.to_s
+          load_template ('container:' + friendly_name(template_name.to_s)), full_path, template_name.to_s
         end
       end
 
