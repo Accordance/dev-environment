@@ -103,10 +103,13 @@ module Container
           template['name'] = template_id
           if template.key? 'environment'
             environment                 = template['environment']
+            # TODO: simplify this
             environment['LOG_LEVEL']    = LOG_LEVEL unless environment.key? 'LOG_LEVEL'
 
             # TODO: abstract the Consul token management
             environment['CONSUL_TOKEN'] = Consul.get_app_secret(template_id) if Consul.app_secret_exist? template_id
+            puts environment
+            environment['CONSUL_URI'] = Consul.consul('development')
           end
           return template
         end

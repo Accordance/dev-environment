@@ -54,4 +54,27 @@ module Consul
     Environment.validate!
   end
 
+  def self.load_policy(path)
+    raw_config = File.read(path)
+
+    policy_def = YAML.load(raw_config)
+
+    rules_str = ""
+    policy_def['rules'].each do |rule|
+      description = "    \# #{rule['description']}\n" if rule.has_key?('description')
+      if rule.has_key?('key')
+        rule = "key \"#{rule['key']}\" {\n#{description}    policy = \"#{rule['policy']}\"\n}\n"
+      elsif rule.has_key?('service')
+        rule = "service \"#{rule['service']}\" {\n#{description}    policy = \"#{rule['policy']}\"\n}\n"
+      else
+        fail 'Unknown ACL rule type'
+      end
+      rules_str += rule
+    end
+
+    {
+      app: policy_def['id'],
+      rules: { "Type" => policy_def['type'], "Rules" => rules_str }
+    }
+  end
 end

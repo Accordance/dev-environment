@@ -1,0 +1,8 @@
+mongo:
+  command: mongod --rest --httpinterface --smallfiles
+  image: mongo:2.6.9
+  environment:
+    SERVICE_27017_NAME: mongo
+  ports:
+    - 27017:27017
+    - 28017:28017

@@ -1,0 +1,10 @@
+id: janus
+type: client
+rules:
+  - description: Default all keys to read-only
+    key: ""
+    policy: read
+  - key: service/janus/
+    policy: write
+  - key: secrets/
+    policy: deny
