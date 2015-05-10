@@ -1,5 +1,14 @@
-Accordance Development environment
-==================================
+Accordance Dev Seed demo environment
+====================================
+
+1. Clone the repo
+1. Make sure you have ```docker``` configured (if on Mac - boot2docker)
+1. ```./start.sh```
+1. Navigate to ```http://dockerhost:8000```
+1. TODO: push demo data into the DB
+
+Accordance Development environment Step-by-Step
+===============================================
 
 Starting the Environment
 ------------------------
