@@ -123,7 +123,7 @@ module Container
 
             # TODO: abstract the Consul token management
             environment['CONSUL_TOKEN'] = Consul.get_app_secret(template_id) if Consul.app_secret_exist? template_id
-            puts environment
+            puts "Container env: #{environment}" if LOG_LEVEL == 'DEBUG'
             environment['CONSUL_URI'] = Consul.consul('development')
           end
           return template

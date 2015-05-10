@@ -16,3 +16,5 @@ RUN tar -xzf data-source.tar.gz -C data-source --strip-components=1
 WORKDIR /opt/data-source
 RUN bundle install
 WORKDIR /opt/dev
+
+ENTRYPOINT ["rake"]
