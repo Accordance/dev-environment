@@ -64,17 +64,32 @@ module Container
       def load_template(name, path, template_name, *args)
         args || args = []
 
-        desc "Starting #{template_name}"
+        # desc "Starting #{template_name}"
         task (name + ":start").to_sym, *args do |_, task_args|
           puts "Starting: #{path}"
           Docker::Utils.start_container load_container_template(path)
         end
 
-        desc "Stopping #{template_name}"
+        # desc "Stopping #{template_name}"
         task (name + ":stop").to_sym, *args do |_, task_args|
           puts "Stopping: #{path}"
           container_template = load_template_file(path)
           Docker::Utils.stop_container container_template
+        end
+
+        # desc "Restarting #{template_name}"
+        task (name + ":restart").to_sym, *args do |_, task_args|
+          puts "Restarting: #{path}"
+          Rake::Task[name + ":stop"].invoke
+          Rake::Task[name + ":start"].invoke
+        end
+
+        desc "Tasks help for #{template_name}"
+        task (name + ":help").to_sym, *args do |_, task_args|
+          puts "Tasks for: #{path}"
+          puts "rake container:#{name}:start\t\t# Starting #{template_name}"
+          puts "rake container:#{name}:stop\t\t# Stopping #{template_name}"
+          puts "rake container:#{name}:restart\t\t# Restarting #{template_name}"
         end
       end
 

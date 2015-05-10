@@ -1,6 +1,6 @@
 consul:
   command: -server -bootstrap-expect 1 -dc dev -node dockerhost -advertise <%= dockerhost %>
-  image: consul_acl:latest
+  image: accordance/consul_acl:0.0.1
   # environment:
   #   SERVICE_8500_NAME: consul
   #   SERVICE_TAGS: master,backups

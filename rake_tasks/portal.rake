@@ -4,11 +4,13 @@ require_relative 'lib/consul_utils'
 namespace :portal do
 
   desc 'Start all Accordance services'
-  task :start => [ 'container:atlas:start'
+  task :start => [ 'container:helios:start',
+                   'container:atlas:start'
                  ]
 
   desc 'Stop all Accordance services'
-  task :stop => [ 'container:atlas:stop'
+  task :stop => [ 'container:atlas:stop',
+                  'container:helios:stop'
                 ]
 
   desc 'Register a service with Consul'

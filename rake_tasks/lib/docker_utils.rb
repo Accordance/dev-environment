@@ -2,7 +2,7 @@ module Docker
   class Utils
 
     def self.dockerhost
-      @boot2docker = @boot2docker || (`boot2docker ip 2> /dev/null`).chomp
+      @boot2docker = @boot2docker || ENV['DOCKERHOST'] || (`boot2docker ip 2> /dev/null`).strip
       @boot2docker
     end
 

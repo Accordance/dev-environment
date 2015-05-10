@@ -1,3 +1,4 @@
+require 'uri'
 require_relative 'docker_utils'
 
 module Consul
@@ -21,7 +22,7 @@ module Consul
     return $consul_token unless $consul_token.nil?
 
     consul_file = "consul_token.#{env}"
-    $consul_token = File.read(consul_file).chomp
+    $consul_token = URI::encode(File.read(consul_file).strip)
   end
 
   def self.get_app_secret(app_id)

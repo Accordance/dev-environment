@@ -4,8 +4,15 @@ require 'securerandom'
 namespace :prepare do
   desc "Prepare development secrets"
   task :secrets do
+    consul_token = 'consul_token.development'
+
     token = SecureRandom.uuid
-    File.open("consul_token.development", 'w') { |f| f.write(token) }
+    if File.exist?(consul_token)
+      file = File.open(consul_token, "r")
+      token = file.read.strip
+    else
+      File.open("consul_token.development", 'w') { |f| f.write(token) }
+    end
 
     consul_config_file_path = '../docker-consul-acl/config/consul.json'
     consul_config_file = File.read(consul_config_file_path)

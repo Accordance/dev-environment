@@ -1,10 +1,10 @@
 module Environment
   def self.work_dir
-    Dir.pwd
+    @work_dir = @work_dir || ENV['WORK_DIR'] || Dir.pwd
   end
 
   def self.hostip
-    @host_ip = @host_ip || (`ifconfig en0 | grep inet | grep 'inet\s' | awk '{print $2}'`).chomp
+    @host_ip = @host_ip || ENV['HOST_IP'] || (`ifconfig en0 | grep inet | grep 'inet\s' | awk '{print $2}'`).strip
     @host_ip
   end
 
