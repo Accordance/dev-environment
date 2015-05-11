@@ -25,7 +25,7 @@ task :stop => ['container:nginx:stop',
                'container:consul:stop']
 
 desc 'Initialize data'
-task :init => []
+task :init => [ 'orientdb:init' ]
 
 desc 'Start everything'
 task default: [:start, :init, 'container:nginx:start']
