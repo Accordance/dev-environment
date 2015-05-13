@@ -1,4 +1,4 @@
 helios:
   action: create
   command: true
-  image: accordance/helios:0.0.2
+  image: accordance/helios:0.0.4
