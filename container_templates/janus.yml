@@ -1,11 +1,11 @@
 janus:
-  image: accordance/janus:0.0.1
+  image: accordance/janus:0.0.2
   environment:
     SERVICE_8081_NAME: janus
-    SERVICE_NAME: janus
+    # SERVICE_NAME: janus
     SERVICE_TAGS: production
     RACK_ENV: production
     LOG_LEVEL: DEBUG
   ports:
-    - 49081:8081
-    - 59091:9293 # Control port
+    - 8081:8081
+    - 9293:9293 # Control port
