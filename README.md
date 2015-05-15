@@ -5,7 +5,6 @@ Accordance Dev Seed demo environment
 1. Make sure you have ```docker``` configured (if on Mac - boot2docker)
 1. ```./start.sh```
 1. Navigate to ```http://dockerhost:8000```
-1. TODO: push demo data into the DB
 
 Accordance Development environment Step-by-Step
 ===============================================
