@@ -5,11 +5,13 @@ namespace :portal do
 
   desc 'Start all Accordance services'
   task :start => [ 'container:helios:start',
-                   'container:atlas:start'
+                   'container:atlas:start',
+                   'container:janus:start',
                  ]
 
   desc 'Stop all Accordance services'
-  task :stop => [ 'container:atlas:stop',
+  task :stop => [ 'container:janus:stop',
+                  'container:atlas:stop',
                   'container:helios:stop'
                 ]
 

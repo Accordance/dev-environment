@@ -87,9 +87,9 @@ module Container
         desc "Tasks help for #{template_name}"
         task (name + ":help").to_sym, *args do |_, task_args|
           puts "Tasks for: #{path}"
-          puts "rake container:#{name}:start\t\t# Starting #{template_name}"
-          puts "rake container:#{name}:stop\t\t# Stopping #{template_name}"
-          puts "rake container:#{name}:restart\t\t# Restarting #{template_name}"
+          puts "rake #{name}:start\t\t# Starting #{template_name}"
+          puts "rake #{name}:stop\t\t# Stopping #{template_name}"
+          puts "rake #{name}:restart\t\t# Restarting #{template_name}"
         end
       end
 
