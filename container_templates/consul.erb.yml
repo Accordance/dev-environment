@@ -14,7 +14,8 @@ consul:
     - 8400:8400
     - 8500:8500
     - 8600:53/udp
-  checks:
-    - script: curl <%= dockerhost %>:8500 >/dev/null 2>&1
-      interval: 2
-      retry: 3
+  # TODO: figure out an alternative for Windows
+  # checks:
+  #   - script: curl <%= dockerhost %>:8500 >/dev/null 2>&1
+  #     interval: 2
+  #     retry: 3

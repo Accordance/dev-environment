@@ -2,7 +2,9 @@ Accordance Dev Seed demo environment
 ====================================
 
 1. Clone the repo
+1. Clone data-source repo in the same folder as this one
 1. Make sure you have ```docker``` configured (if on Mac - boot2docker)
+1. Note: on non-Mac environment set the DOCKERHOST variable to the docker0 interface IP
 1. ```./start.sh```
 1. Navigate to ```http://dockerhost:8000```
 
@@ -30,6 +32,8 @@ Destroying the Environment
 Initial Setup
 -------------
 1. Make sure you have all the 'Prerequisites'
+1. If you're using VirtualBox (boot2docker or docker-machine), map proper ports following 'Configuring VirtualBox' instructions
+1. Prepare you 'Development Environment configuration' by choosing steps from a section appropriate to your OS
 1. Configure 'dockerhost' hostname to be pointing to the same IP as DOCKER_HOST environment variable and it's pingable: ```ping dockerhost```
 1. Create a working folder for Accordance project: ```mkdir accordance```
 1. Navigate to the working folder: ```cd accordance```
@@ -57,6 +61,11 @@ Initial Setup
    rake prepare:secrets
    ```
 
+Configuring VirtualBox
+----------------------
+Set $Env:DOCKER_MACHINE_NAME variable to the name of the Docker Machine you're using
+
+
 Prerequisites
 --------------
 1. Ruby >= 2.1.2
@@ -64,3 +73,17 @@ Prerequisites
 1. Docker (should be 100% operational)
 1. boot2docker >= 1.6.0 (if you're on Mac)
    * VirtualBox >= 4.3.26
+
+Development Environment configuration
+=====================================
+Git
+---
+Configure Git on Windows to properly handle line endings
+```git config --global core.autocrlf true```
+Fixing "old mode" to "new mode" error on Windows
+```git config core.filemode false```
+
+For Windows
+-----------
+Configure environment variables by running
+```config_dev_env.ps1```

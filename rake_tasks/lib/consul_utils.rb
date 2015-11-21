@@ -1,10 +1,11 @@
 require 'uri'
 require_relative 'docker_utils'
+require_relative 'dev_environment'
 
 module Consul
   def self.consul_uri(env, path)
     url = "#{consul(env)}/v1/#{path}"
-    "#{url}?token=#{consul_token(env)}"
+    "#{url}?dc=dev&token=#{consul_token(env)}"
   end
 
   def self.consul(env)
@@ -44,15 +45,16 @@ module Consul
   end
 
   def self.get_kv(env, path)
-    url = "#{consul(env)}/v1/kv/#{path}"
-    "#{url}?token=#{consul_token(env)}"
+    # url = "#{consul(env)}/v1/kv/#{path}"
+    # "#{url}?token=#{consul_token(env)}"
+    consul_uri(env, "kv/#{path}")
   end
 
   def self.set_kv(env, path, value)
-    command = "curl -v  --trace-ascii /dev/stderr -X PUT -d \"#{value}\" #{Consul.get_kv(env, path)} 2> /dev/null"
-    puts command if LOG_LEVEL == 'DEBUG'
-    `#{command}`
-    Environment.validate!
+    # command = "curl -v  --trace-ascii /dev/stderr -X PUT -d \"#{value}\" #{Consul.get_kv(env, path)} 2> /dev/null"
+    # puts command if LOG_LEVEL == 'DEBUG'
+    # `#{command}`
+    Environment.post_data(Consul.get_kv(env, path), value)
   end
 
   def self.load_policy(path)

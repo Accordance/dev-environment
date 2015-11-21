@@ -26,8 +26,9 @@ module Docker
 
       container_template.each do |template_id, _|
         name = template_id
-        ps   = `docker ps | grep #{name} | awk {'print $1'}`.chomp
-        ps.each_line do |line|
+        containers = `docker ps`
+        ps = containers_by_name(name)
+        ps.each do |line|
           if line != ''
             cmd = "docker kill #{line}"
             puts cmd if LOG_LEVEL == 'DEBUG'
@@ -36,7 +37,7 @@ module Docker
         end
 
         ps = containers_by_name(name)
-        ps.each_line do |line|
+        ps.each do |line|
           if line != ''
             cmd = "docker rm #{line}"
             puts cmd if LOG_LEVEL == 'DEBUG'
@@ -68,15 +69,23 @@ module Docker
     end
 
     def self.present?(name)
-      containers_by_name(name) != ''
+      ! containers_by_name(name).empty?
     end
 
     def self.containers_by_name(name)
-      `docker ps -a | grep #{name} | awk {'print $1'}`.chomp
+      # `docker ps -a | grep #{name} | awk {'print $1'}`.chomp
+      containers = `docker ps -a`
+      ps = []
+      containers.each_line { |line| if line.include?(name) then ps << line.strip.partition(" ").first end }
+      ps
     end
 
     def self.get_image_id(name)
-      `docker images | grep #{name} | awk '{print $3}'`.chomp
+      # `docker images | grep #{name} | awk '{print $3}'`.chomp
+      images = `docker images`
+      img = []
+      images.each_line { |line| if line.include?(name) then img << line.strip.partition(" ").first end }
+      img.first
     end
 
   end

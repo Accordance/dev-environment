@@ -32,3 +32,10 @@ task init: [ 'orientdb:init', 'mongodb:init' ]
 
 desc 'Start everything'
 task default: [:start, :init]
+
+desc 'host_os'
+task :host_os do
+  require 'rbconfig'
+
+  puts host_os = RbConfig::CONFIG['host_os']
+end

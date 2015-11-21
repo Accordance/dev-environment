@@ -1,10 +1,12 @@
+require 'net/http'
+
 module Environment
   def self.work_dir
     @work_dir = @work_dir || ENV['WORK_DIR'] || Dir.pwd
   end
 
   def self.hostip
-    @host_ip = @host_ip || ENV['HOST_IP'] || (`ifconfig en0 | grep inet | grep 'inet\s' | awk '{print $2}'`).strip
+    @host_ip = @host_ip || ENV['HOST_IP'] || (`ifconfig docker0 | grep inet | grep 'inet\s' | awk '{print $2}'`).strip
     @host_ip
   end
 
@@ -17,7 +19,13 @@ module Environment
     command = "curl #{url}"
     command += " 2> /dev/null" unless LOG_LEVEL == 'DEBUG'
     puts command if LOG_LEVEL == 'DEBUG'
-    result = `#{command}`
+    if Gem.win_platform?
+      uri = URI(url)
+      result = Net::HTTP.get(uri)
+    else
+      result = `#{command}`
+    end
+    puts result
     validate!
     puts "Result: #{result}" if LOG_LEVEL == 'DEBUG'
     return result
@@ -27,7 +35,20 @@ module Environment
     command = "curl -X PUT -d '#{payload}' #{url}"
     command += " 2> /dev/null" unless LOG_LEVEL == 'DEBUG'
     puts command if LOG_LEVEL == 'DEBUG'
-    result = `#{command}`
+    if Gem.win_platform?
+      uri = URI(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      # http.set_debug_output($stdout)
+      header = {'Content-Type' => 'text/json'}
+      request = Net::HTTP::Put.new(uri.request_uri, initheader = header)
+      #request.add_field('Content-Type', 'application/json')
+      #request.add_field('Content-Type', 'text/plain; charset=utf-8')
+      request.body = payload #.to_json
+      response = http.request(request)
+      result = response.body
+    else
+      result = `#{command}`
+    end
     validate!
     puts "Result: #{result}" if LOG_LEVEL == 'DEBUG'
     return result

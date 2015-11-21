@@ -1,6 +1,5 @@
 require 'json'
 require 'securerandom'
-require 'pp'
 
 namespace :secrets do
   desc "Configure secrets in Consul"

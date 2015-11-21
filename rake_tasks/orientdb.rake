@@ -28,8 +28,12 @@ namespace :orientdb do
       pwd = Dir.pwd
       puts "In folder #{pwd}"
 
-      pid = fork { system(command) }
-      _, status = Process.waitpid2(pid)
+      if Gem.win_platform?
+        system(command)
+      else
+        pid = fork { system(command) }
+        _, status = Process.waitpid2(pid)
+      end
     end
   end
 end

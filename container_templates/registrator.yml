@@ -1,6 +1,6 @@
 registrator:
   command: consul://consul:8500 --ttl 500
-  image: progrium/registrator:latest
+  image: gliderlabs/registrator:latest
   hostname: dockerhost
   links:
     - consul:consul
