@@ -1,2 +1,4 @@
 consul_token.*
 orientdb_config/databases
+.idea/
+secrets/
