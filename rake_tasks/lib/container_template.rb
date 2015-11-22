@@ -105,6 +105,7 @@ module Container
         container_template = YAML.load_file(file_path)
         if Pathname.new(file_path).basename.to_s.include? '.erb'
           template           = ERB.new(container_template.to_yaml).result(OpenStruct.new(vars).instance_eval { binding })
+          puts template if LOG_LEVEL == 'DEBUG'
           container_template = YAML.load(template)
         end
 

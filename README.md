@@ -32,7 +32,10 @@ Destroying the Environment
 Initial Setup
 -------------
 1. Make sure you have all the 'Prerequisites'
-1. If you're using VirtualBox (boot2docker or docker-machine), map proper ports following 'Configuring VirtualBox' instructions
+1. Create docker machine following docker-machine instructions. Ex: ```docker-machine create --driver virtualbox dev```
+1. Stop docker machine. Ex: ```docker-machine stop dev```
+1. If you're using VirtualBox (boot2docker or docker-machine), map proper ports following 'Configuring VirtualBox' instructions (only once per new docker machine).
+1. Start docker machine. Ex: ```docker-machine start dev```
 1. Prepare you 'Development Environment configuration' by choosing steps from a section appropriate to your OS
 1. Configure 'dockerhost' hostname to be pointing to the same IP as DOCKER_HOST environment variable and it's pingable: ```ping dockerhost```
 1. Create a working folder for Accordance project: ```mkdir accordance```
