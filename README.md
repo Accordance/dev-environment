@@ -67,7 +67,7 @@ Initial Setup
 Configuring VirtualBox
 ----------------------
 Set $Env:DOCKER_MACHINE_NAME variable to the name of the Docker Machine you're using
-
+Run 'config_docker_machine' to configure VirtualBox ports and shared folders
 
 Prerequisites
 --------------
