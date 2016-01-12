@@ -1,6 +1,6 @@
 atlas:
-  command: --consul.host=<%= dockerhost %> --consul.serviceOverride.address=<%= dockerhost %>
-  image: accordance/atlas:0.0.3
+  command: --spring.cloud.consul.host=<%= dockerhost %> --spring.cloud.consul.discovery.ipAddress=<%= dockerhost %> --orient_db.host=<%= dockerhost %>
+  image: accordance/atlas:0.0.4
   ports:
     - 8080:8080
   environment:
