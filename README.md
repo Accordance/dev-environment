@@ -1,6 +1,8 @@
 Accordance Dev Seed demo environment
 ====================================
 
+Note: This has been tested only on MacOS
+
 1. Clone the repo
 1. Clone data-source repo in the same folder as this one
 1. Make sure you have ```docker``` configured (if on Mac - boot2docker)
@@ -13,7 +15,7 @@ Accordance Development environment Step-by-Step
 
 Starting the Environment
 ------------------------
-1. Make sure that your environment is prepared per the 'Initial Setup' instructions
+1. Make sure that your environment is prepared per the '[Initial Setup](#initial-setup)' instructions
 1. Start all the components: ```rake start```
 1. Wait a little for the process to complete ...
 1. (Only for demo purposes) Load demo data: ```rake orientdb:init```
