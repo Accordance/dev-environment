@@ -33,12 +33,15 @@ Destroying the Environment
 
 Initial Setup
 -------------
-1. Make sure you have all the 'Prerequisites'
+1. Make sure you have all the '[Prerequisites](#prerequisites)'
+1. Prepare you '[Development Environment configuration](#development-environment-configuration)' by choosing steps from a section appropriate to your OS
 1. Create docker machine following docker-machine instructions. Ex: ```docker-machine create --driver virtualbox dev```
 1. Stop docker machine. Ex: ```docker-machine stop dev```
-1. If you're using VirtualBox (boot2docker or docker-machine), map proper ports following 'Configuring VirtualBox' instructions (only once per new docker machine).
+1. Map ports and mount folders (has to be executed once per new Docker Machine) to configure VirtualBox:
+  1. Windows: run `config_docker_machine.ps1` in PowerShell
+  1. MaxOS: `config_docker_machine.sh`
 1. Start docker machine. Ex: ```docker-machine start dev```
-1. Prepare you 'Development Environment configuration' by choosing steps from a section appropriate to your OS
+1. Run `bundle install`
 1. Configure 'dockerhost' hostname to be pointing to the same IP as DOCKER_HOST environment variable and it's pingable: ```ping dockerhost```
 1. Create a working folder for Accordance project: ```mkdir accordance```
 1. Navigate to the working folder: ```cd accordance```
@@ -73,11 +76,19 @@ Run 'config_docker_machine' to configure VirtualBox ports and shared folders
 
 Prerequisites
 --------------
+
+For All:
 1. Ruby >= 2.1.2
+1. Bundler gem (run `gem install bundle`)
 1. RVM >= 1.26.9
-1. Docker (should be 100% operational)
-1. boot2docker >= 1.6.0 (if you're on Mac)
-   * VirtualBox >= 4.3.26
+1. (Windows/MacOS) Docker Toolbox (should be 100% operational)
+
+For Windows:
+1. Use PowerShell as default shell
+1. Install [Ruby for Windows](http://rubyinstaller.org/downloads)
+1. install [Ruby Development Kit](http://rubyinstaller.org/downloads) following [directions](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit).
+1. Follow Docker Toolbox for Windows [instructions](https://docs.docker.com/windows/step_one/).
+1. Git [for Windows](http://www.git-scm.com/download/win).
 
 Development Environment configuration
 =====================================
