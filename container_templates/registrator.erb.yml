@@ -1,7 +1,7 @@
 registrator:
-  command: consul://consul:8500 --ttl 500
+  command: -ip=<%= dockerhost %> consul://consul:8500
   image: gliderlabs/registrator:latest
-  hostname: dockerhost
+  hostname: registrator
   links:
     - consul:consul
   volumes:
