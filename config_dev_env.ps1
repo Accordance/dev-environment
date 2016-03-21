@@ -17,7 +17,9 @@ IF(!$Env:DOCKERHOST) {
 }
 Write-Host "Docker host: " $Env:DOCKER_HOST
 
-$Env:HOST_IP = (Get-WmiObject -class win32_NetworkAdapterConfiguration -Filter 'ipenabled = "true"').ipaddress[0]
+IF(!$Env:HOST_IP) {
+  $Env:HOST_IP = $Env:DOCKERHOST
+}
 Write-Host "Host IP: " $Env:HOST_IP
 
 # $Env:WORK_DIR = Split-Path $script:MyInvocation.MyCommand.Path
@@ -26,6 +28,6 @@ IF(!$Env:WORK_DIR) {
 }
 Write-Host "Working folder: " $Env:WORK_DIR
 docker-machine ssh "$Env:DOCKER_MACHINE_NAME" mkdir /home/accordance
-docker-machine ssh "$Env:DOCKER_MACHINE_NAME" sudo mount -t vboxsf -o uid=1000,gid=50 accordance /home/accordance
+docker-machine ssh "$Env:DOCKER_MACHINE_NAME" "sudo mount -t vboxsf -o uid=1000,gid=50 accordance /home/accordance"
 
 # $Env:LOG_LEVEL="DEBUG"
